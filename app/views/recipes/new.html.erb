@@ -1,0 +1,33 @@
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        New recipe create.
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+        <%= form_with model: @recipe do |f| %>
+          <div class="field">
+            <%= f.label :title, 'Recipe name', class:'label'%>
+            <%= f.text_field :title, class:'input' %>
+          </div>
+          <div class="field">
+            <%= f.label :content, 'Recipe', class:'label' %>
+            <%= f.text_area :content, class:'textarea' %>
+          </div>
+          <div class="field">
+            <%= f.label :image, 'Recipe image', class:'label' %>
+            <%# <%= f.attachment_field :image, class:input %> %>
+          </div>
+          <%= f.submit 'New post', class: "button is-light" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
