@@ -8,11 +8,22 @@
   </div>
 </section>
 
+<% if @recipe.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= pluralize(@recipe.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <ul>
+      <% @recipe.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-6">
-        <%= form_with model: @recipe do |f| %>
+        <%= form_for @recipe do |f| %>
           <div class="field">
             <%= f.label :title, 'Recipe name', class:'label'%>
             <%= f.text_field :title, class:'input' %>
@@ -23,7 +34,7 @@
           </div>
           <div class="field">
             <%= f.label :image, 'Recipe image', class:'label' %>
-            <%# <%= f.attachment_field :image, class:input %> %>
+            <%= f.file_field :image, class:'input' %>
           </div>
           <%= f.submit 'New post', class: "button is-light" %>
         <% end %>
