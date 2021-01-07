@@ -14,13 +14,16 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if @user != current_user
+      redirect_to users_path, alert: 'Invild access'
+    end
   end
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to user_path(@user), notice: 'Posted successfully.'
     else
-      render edit_user_path(@user)
+      render :edit
     end
   end
 

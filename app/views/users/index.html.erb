@@ -18,7 +18,11 @@
                 <div class="card-image">
                   <figure class="image">
                     <%= link_to user_path(user) do %>
-                      <%= attachment_image_tag user, :profile_image, fallback: "no-image.png" %>
+                      <% if user.profile_image? %>
+                        <%= image_tag user.profile_image.url %>
+                      <% else %>
+                        <%= image_tag 'default.png' %>
+                      <% end %>
                     <% end %>
                   </figure>
               </div>
@@ -30,7 +34,7 @@
                 </div>
               </div>
               <div class="content">
-                Posts number：
+                Number of posts：<%= user.recipes.count %>
               </div>
             </div>
           </div>
